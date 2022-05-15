@@ -1,36 +1,25 @@
-'use strict'
-
 const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const config = require('./config');
+const bodyParse = require('body-parser');
+const cors = require('cors');
+
+const PORT = process.env.PORT || 3000;
 
 const app = express();
-const router = express.Router();
 
-mongoose.connect(config.CONNECTION_STRING);
+app.use(cors());
+app.use(bodyParse.json());
+app.use(bodyParse.urlencoded({ extended: false }));
 
-//load models
-const User = require('./models/user');
-
-//load routes
-const indexRoute = require('./routes/index-route');
-const userRoute = require('./routes/user-route');
-
-app.use(bodyParser.json({ limit: '5mb' }));
-app.use(bodyParser.urlencoded({ extentend: false }));
-
-// Enable CORS ()
-if(config.MODE == 'development') {
-    app.use(function (req, res, next) {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, x-access-token');
-        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-        next();
+app.get('/', (_, res) => {
+    return res.status(200).send({
+        message: 'API: OK',
+        version: 'V1',
     });
-}
+});
 
-app.use('/', indexRoute);
-app.use('/users', userRoute);
+require('./controllers')(app);
 
-module.exports = app;
+app.listen(PORT, () => {
+    const now = new Date();
+    console.log(`Listening on port ${PORT} at ${now.toLocaleString('pt-BR')}...`);
+});
