@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParse = require("body-parser");
 const cors = require("cors");
 const routes = require("./v1/routes");
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('../swagger_output.json');
 
 const PORT = process.env.PORT || 3000;
 
@@ -17,6 +19,8 @@ app.get("/", (_, res) => {
     version: "V1",
   });
 });
+
+app.use('/doc/v1', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 routes(app);
 

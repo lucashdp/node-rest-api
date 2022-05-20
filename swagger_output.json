@@ -1,0 +1,298 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Tutorials API",
+    "description": ""
+  },
+  "host": "localhost:8001",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "Tutorial",
+      "description": "Tutorial routes"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
+    }
+  },
+  "paths": {
+    "/v1/public/auth": {
+      "get": {
+        "tags": [
+          "Tutorial"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Tutorial found",
+            "schema": {
+              "$ref": "#/definitions/Tutorial"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/public/tutorials": {
+      "get": {
+        "tags": [
+          "Tutorial"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Tutorial found",
+            "schema": {
+              "$ref": "#/definitions/Tutorial"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tutorial"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Tutorial model object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": ""
+                },
+                "description": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tutorial found",
+            "schema": {
+              "$ref": "#/definitions/Tutorial"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/public/tutorials/{tutorialId}": {
+      "get": {
+        "tags": [
+          "Tutorial"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "tutorialId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tutorial found",
+            "schema": {
+              "$ref": "#/definitions/Tutorial"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tutorial"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "tutorialId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tutorial found",
+            "schema": {
+              "$ref": "#/definitions/Tutorial"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tutorial"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "tutorialId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tutorial found",
+            "schema": {
+              "$ref": "#/definitions/Tutorial"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Tutorial": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "asdasdasdasDASDAS"
+        },
+        "title": {
+          "type": "string",
+          "example": "Título do Tutorial"
+        },
+        "description": {
+          "type": "string",
+          "example": "Descrição do tutorial"
+        }
+      }
+    }
+  }
+}
